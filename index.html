@@ -86,18 +86,17 @@ button{
     <button onclick="window.location.href='journey.html'">Next Test → 💕</button>
 </div>
 
-<!-- HIDDEN MUSIC -->
-<iframe id="bgMusic"
-width="0" height="0"
-src="https://www.youtube.com/embed/pxAiwZlzSD8?autoplay=1&loop=1&playlist=pxAiwZlzSD8&mute=1"
-allow="autoplay">
-</iframe>
+<!-- 🎵 MUSIC ADDED -->
+<audio id="bgMusic" autoplay loop>
+    <source src="take-me.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-/* UNMUTE ON FIRST CLICK */
-document.body.addEventListener("click",()=>{
-    document.getElementById("bgMusic").src += "&mute=0";
-},{once:true});
+
+/* Fix autoplay block */
+document.body.addEventListener("click", function() {
+    document.getElementById("bgMusic").play();
+}, { once: true });
 
 const graph = document.getElementById("graph");
 const draw = document.getElementById("draw");
