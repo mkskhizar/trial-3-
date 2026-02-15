@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Final Question 💕</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ffb3c1, #ff69b4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-family: 'Comic Sans MS', cursive;
-            text-align: center;
-            overflow: hidden;
-        }
+<title>Final Question 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        h1 {
-            font-size: 3em;
-            color: white;
-            margin-bottom: 50px;
-        }
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#ffb3c1,#ff69b4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-family:'Comic Sans MS',cursive;
+    text-align:center;
+    overflow:hidden;
+}
 
-        .btn {
-            padding: 18px 60px;
-            font-size: 1.5em;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 20px;
-            position: relative;
-            transition: 0.3s;
-        }
+h1{
+    font-size:3em;
+    color:white;
+    margin-bottom:50px;
+}
 
-        #yes {
-            background: white;
-            color: #ff1493;
-        }
+.btn{
+    padding:18px 60px;
+    font-size:1.5em;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    margin:20px;
+    position:relative;
+}
 
-        #no {
-            background: #ff1493;
-            color: white;
-            position: absolute;
-        }
+#yes{
+    background:white;
+    color:#ff1493;
+}
 
-        #finalMessage {
-            display: none;
-            font-size: 2.5em;
-            color: white;
-            margin-top: 40px;
-        }
-    </style>
+#no{
+    background:#ff1493;
+    color:white;
+    position:absolute;
+}
+
+#finalMessage{
+    display:none;
+    font-size:2.5em;
+    color:white;
+    margin-top:40px;
+}
+</style>
 </head>
+
 <body>
 
 <h1>Will you be my Valentine? 💕</h1>
@@ -63,26 +65,38 @@
     I knew ittt 😌💘 <br> You're mine foreverrr 💍💕
 </div>
 
+<!-- HIDDEN MUSIC -->
+<iframe id="bgMusic"
+width="0" height="0"
+src="https://www.youtube.com/embed/pxAiwZlzSD8?autoplay=1&loop=1&playlist=pxAiwZlzSD8&mute=1"
+allow="autoplay">
+</iframe>
+
 <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const message = document.getElementById("finalMessage");
+/* UNMUTE ON FIRST CLICK */
+document.body.addEventListener("click",()=>{
+    document.getElementById("bgMusic").src += "&mute=0";
+},{once:true});
 
-    function moveNoButton() {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    }
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
+const message=document.getElementById("finalMessage");
 
-    noBtn.addEventListener("mouseover", moveNoButton);
-    noBtn.addEventListener("click", moveNoButton);
+function moveNoButton(){
+    const x=Math.random()*(window.innerWidth-noBtn.offsetWidth);
+    const y=Math.random()*(window.innerHeight-noBtn.offsetHeight);
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+}
 
-    yesBtn.onclick = () => {
-        message.style.display = "block";
-        yesBtn.style.display = "none";
-        noBtn.style.display = "none";
-    };
+noBtn.addEventListener("mouseover",moveNoButton);
+noBtn.addEventListener("click",moveNoButton);
+
+yesBtn.onclick=()=>{
+    message.style.display="block";
+    yesBtn.style.display="none";
+    noBtn.style.display="none";
+};
 </script>
 
 </body>
