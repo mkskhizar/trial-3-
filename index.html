@@ -1,308 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine Gift Challenge 🐱💗</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Gift Challenge 💕</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #fff0f3, #ffb3c1);
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            color: #d63384;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#fff0f3,#ffb3c1);
+    font-family:'Comic Sans MS',cursive;
+    text-align:center;
+    color:#d63384;
+}
 
-        h1 {
-            font-size: 3.4em;
-            margin: 45px 0 25px;
-            text-shadow: 3px 3px #fff;
-            color: #ff1493;
-            line-height: 1.2;
-        }
+h1{
+    font-size:2.6em;
+    margin-top:40px;
+    color:#ff1493;
+}
 
-        p {
-            font-size: 1.75em;
-            margin: 25px auto;
-            max-width: 950px;
-            line-height: 1.55;
-            padding: 0 25px;
-        }
+p{
+    font-size:1.2em;
+}
 
-        #prompt {
-            font-size: 1.9em;
-            margin: 35px auto 30px;
-            max-width: 1050px;
-        }
+#container{
+    position:relative;
+    width:90%;
+    max-width:850px;
+    height:70vh;
+    margin:40px auto;
+    border:10px solid #ff69b4;
+    border-radius:30px;
+    background:white;
+    overflow:hidden;
+    touch-action:none;
+}
 
-        #hint-btn {
-            margin: 20px auto;
-            padding: 14px 40px;
-            font-size: 1.5em;
-            background: #ffe4e1;
-            color: #c2185b;
-            border: 3px solid #ff69b4;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            transition: all 0.3s;
-        }
+canvas{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
 
-        #hint-btn:hover {
-            background: #ff69b4;
-            color: white;
-            transform: scale(1.08);
-        }
+button{
+    padding:16px 55px;
+    font-size:1.3em;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    margin:20px;
+}
 
-        #hint-text {
-            display: none;
-            font-size: 1.6em;
-            color: #c2185b;
-            background: rgba(255,255,255,0.9);
-            border: 4px solid #ff69b4;
-            border-radius: 25px;
-            padding: 25px 40px;
-            margin: 20px auto;
-            max-width: 700px;
-            box-shadow: 0 8px 30px rgba(255,105,180,0.4);
-            animation: fadeIn 0.5s ease-out;
-        }
+#done-btn{ background:#ff69b4; color:white; }
+#clear-btn{ background:#ffe4e1; color:#d63384; }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(15px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        #container {
-            position: relative;
-            width: 94%;
-            max-width: 880px;
-            height: 74vh;
-            margin: 45px auto;
-            border: 12px solid #ff69b4;
-            border-radius: 40px;
-            background: white;
-            box-shadow: 0 18px 70px rgba(255,105,180,0.45);
-            overflow: hidden;
-        }
-
-        canvas {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0; left: 0;
-        }
-
-        button.main-btn {
-            margin: 35px 25px;
-            padding: 20px 70px;
-            font-size: 1.9em;
-            border: none;
-            border-radius: 80px;
-            cursor: pointer;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-        }
-
-        #done-btn {
-            background: #ff69b4;
-            color: white;
-        }
-
-        #done-btn:hover { background: #ff1493; transform: scale(1.15); }
-
-        #clear-btn {
-            background: #ffe4e1;
-            color: #d63384;
-        }
-
-        #clear-btn:hover { background: #ffc1cc; transform: scale(1.1); }
-
-        #success {
-            display: none;
-            font-size: 2.9em;
-            color: #ff1493;
-            margin: 80px auto;
-            max-width: 1000px;
-            padding: 60px 50px;
-            background: rgba(255,255,255,0.88);
-            border-radius: 50px;
-            backdrop-filter: blur(18px);
-            line-height: 1.6;
-            box-shadow: 0 12px 50px rgba(0,0,0,0.2);
-        }
-
-        #next-btn {
-            display: none;
-            background: #ff1493;
-            color: white;
-            margin-top: 40px;
-        }
-
-        #next-btn:hover { background: #c2185b; transform: scale(1.1); }
-    </style>
+#success{
+    display:none;
+    font-size:2em;
+    margin-top:30px;
+    color:#ff1493;
+}
+</style>
 </head>
 
 <body>
 
-<h1>ARE YOU READY TO WIN YOUR VALENTINE GIFT?</h1>
-
-<p style="font-size:1.6em; opacity:0.9; margin-bottom: 60px;">
-    Not so easily babe... solve the questions and make me proud 😋<br>
-    Let's start~
-</p>
-
-<p id="prompt">
-    Draw the diagram of increase in my love (demand) and your cuteness (supply).
-</p>
-
-<button id="hint-btn">HINT 💕</button>
-<div id="hint-text">Its relationship is also like us — positive ♡</div>
+<h1>Draw Increase in Love & Cuteness 💕</h1>
+<p>Draw upward shift in my love (Demand) and your cuteness (Supply).</p>
 
 <div id="container">
-    <canvas id="graph-canvas"></canvas>
-    <canvas id="draw-canvas"></canvas>
+    <canvas id="graph"></canvas>
+    <canvas id="draw"></canvas>
 </div>
 
-<button id="done-btn" class="main-btn">Done 💗</button>
-<button id="clear-btn" class="main-btn">Clear & Draw Again</button>
+<button id="done-btn">Done 💕</button>
+<button id="clear-btn">Clear</button>
 
 <div id="success">
-    Yes you made it right obviously your teacher would be so proud of you ♡<br><br>
-    Get ready for another test... 😏💕
-    <br><br>
-    <button id="next-btn" class="main-btn">Next Test → 💕</button>
+    You did ittt 😌💗<br><br>
+    <button onclick="window.location.href='journey.html'">Next Test → 💕</button>
 </div>
 
+<!-- HIDDEN MUSIC -->
+<iframe id="bgMusic"
+width="0" height="0"
+src="https://www.youtube.com/embed/pxAiwZlzSD8?autoplay=1&loop=1&playlist=pxAiwZlzSD8&mute=1"
+allow="autoplay">
+</iframe>
+
 <script>
-const graphCanvas = document.getElementById('graph-canvas');
-const drawCanvas = document.getElementById('draw-canvas');
-const ctxGraph = graphCanvas.getContext('2d');
-const ctxDraw = drawCanvas.getContext('2d');
+/* UNMUTE ON FIRST CLICK */
+document.body.addEventListener("click",()=>{
+    document.getElementById("bgMusic").src += "&mute=0";
+},{once:true});
 
-let paths = [];
-let currentPath = [];
+const graph = document.getElementById("graph");
+const draw = document.getElementById("draw");
+const ctxGraph = graph.getContext("2d");
+const ctxDraw = draw.getContext("2d");
+const container = document.getElementById("container");
 
-function resize() {
-    const w = graphCanvas.offsetWidth;
-    const h = graphCanvas.offsetHeight;
-    graphCanvas.width = drawCanvas.width = w;
-    graphCanvas.height = drawCanvas.height = h;
-    redrawEverything();
+function resizeCanvas(){
+    const rect = container.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    graph.width = draw.width = rect.width * dpr;
+    graph.height = draw.height = rect.height * dpr;
+
+    graph.style.width = draw.style.width = rect.width + "px";
+    graph.style.height = draw.style.height = rect.height + "px";
+
+    ctxGraph.setTransform(dpr,0,0,dpr,0,0);
+    ctxDraw.setTransform(dpr,0,0,dpr,0,0);
+
+    drawAxes();
 }
 
-function redrawEverything() {
-    ctxGraph.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
-    const margin = 140;
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
-    ctxGraph.strokeStyle = '#444';
-    ctxGraph.lineWidth = 7;
+function drawAxes(){
+    ctxGraph.clearRect(0,0,graph.width,graph.height);
+    ctxGraph.lineWidth=4;
+    ctxGraph.strokeStyle="#444";
+
+    const m=70;
+    const w=container.clientWidth;
+    const h=container.clientHeight;
+
     ctxGraph.beginPath();
-    ctxGraph.moveTo(margin, margin);
-    ctxGraph.lineTo(margin, graphCanvas.height - margin);
-    ctxGraph.lineTo(graphCanvas.width - margin, graphCanvas.height - margin);
+    ctxGraph.moveTo(m,m);
+    ctxGraph.lineTo(m,h-m);
+    ctxGraph.lineTo(w-m,h-m);
     ctxGraph.stroke();
-
-    ctxGraph.font = 'bold 28px Comic Sans MS';
-    ctxGraph.fillStyle = '#ff1493';
-    ctxGraph.fillText("Cuteness (Supply)", graphCanvas.width - margin - 180, graphCanvas.height - margin + 60);
-
-    ctxGraph.save();
-    ctxGraph.translate(margin - 80, margin + 120);
-    ctxGraph.rotate(-Math.PI / 2);
-    ctxGraph.fillText("My Love (Demand)", 0, 0);
-    ctxGraph.restore();
-
-    ctxDraw.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-    ctxDraw.strokeStyle = '#ff1493';
-    ctxDraw.lineWidth = 20;
-    ctxDraw.lineCap = 'round';
-
-    paths.forEach(path => {
-        if (path.length < 2) return;
-        ctxDraw.beginPath();
-        ctxDraw.moveTo(path[0].x, path[0].y);
-        for (let i = 1; i < path.length; i++) {
-            ctxDraw.lineTo(path[i].x, path[i].y);
-        }
-        ctxDraw.stroke();
-    });
 }
 
-window.addEventListener('resize', resize);
-resize();
+let drawing=false,lastX=0,lastY=0;
 
-let drawing = false;
+ctxDraw.lineCap="round";
+ctxDraw.lineJoin="round";
+ctxDraw.strokeStyle="#ff69b4";
+ctxDraw.lineWidth=6;
 
-function getPos(e) {
-    const rect = drawCanvas.getBoundingClientRect();
-    return {
-        x: (e.clientX || (e.touches && e.touches[0]?.clientX)) - rect.left,
-        y: (e.clientY || (e.touches && e.touches[0]?.clientY)) - rect.top
+function getPos(e){
+    const rect=draw.getBoundingClientRect();
+    return{
+        x:e.clientX-rect.left,
+        y:e.clientY-rect.top
     };
 }
 
-function start(e) {
-    drawing = true;
-    currentPath = [getPos(e)];
-}
-
-function move(e) {
-    if (!drawing) return;
-    const pos = getPos(e);
-    currentPath.push(pos);
-    ctxDraw.lineTo(pos.x, pos.y);
-    ctxDraw.stroke();
-}
-
-function stop() {
-    if (drawing && currentPath.length > 1) {
-        paths.push(currentPath);
-    }
-    drawing = false;
-    currentPath = [];
-}
-
-drawCanvas.addEventListener('pointerdown', start);
-drawCanvas.addEventListener('pointermove', move);
-drawCanvas.addEventListener('pointerup', stop);
-drawCanvas.addEventListener('pointerout', stop);
-
-document.getElementById('done-btn').onclick = () => {
-    document.getElementById('success').style.display = 'block';
-    document.getElementById('next-btn').style.display = 'inline-block';
-    confetti({ particleCount: 280, spread: 140, origin: { y: 0.6 } });
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-};
-
-document.getElementById('next-btn').onclick = () => {
-    window.location.href = 'journey.html';
-};
-
-document.getElementById('clear-btn').onclick = () => {
-    paths = [];
-    currentPath = [];
-    ctxDraw.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-    document.getElementById('success').style.display = 'none';
-};
-
-const hintBtn = document.getElementById('hint-btn');
-const hintText = document.getElementById('hint-text');
-
-hintBtn.onclick = () => {
-    hintText.style.display = hintText.style.display === 'block' ? 'none' : 'block';
-};
-
-document.addEventListener('click', (e) => {
-    if (!hintBtn.contains(e.target) && !hintText.contains(e.target)) {
-        hintText.style.display = 'none';
-    }
+draw.addEventListener("pointerdown",e=>{
+    drawing=true;
+    draw.setPointerCapture(e.pointerId);
+    const pos=getPos(e);
+    lastX=pos.x;
+    lastY=pos.y;
 });
+
+draw.addEventListener("pointermove",e=>{
+    if(!drawing) return;
+    const pos=getPos(e);
+
+    ctxDraw.beginPath();
+    ctxDraw.moveTo(lastX,lastY);
+    ctxDraw.quadraticCurveTo(lastX,lastY,(lastX+pos.x)/2,(lastY+pos.y)/2);
+    ctxDraw.stroke();
+
+    lastX=pos.x;
+    lastY=pos.y;
+});
+
+draw.addEventListener("pointerup",()=>drawing=false);
+draw.addEventListener("pointerleave",()=>drawing=false);
+
+document.getElementById("clear-btn").onclick=()=>{
+    ctxDraw.clearRect(0,0,draw.width,draw.height);
+    document.getElementById("success").style.display="none";
+};
+
+document.getElementById("done-btn").onclick=()=>{
+    document.getElementById("success").style.display="block";
+    confetti({particleCount:200,spread:120});
+};
 </script>
 
 </body>
